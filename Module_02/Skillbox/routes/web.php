@@ -17,5 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('userform', [App\Http\Controllers\FormController::class,'index']);
-Route::post('store_form', [App\Http\Controllers\FormController::class,'store']);
+Route::get('userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
+Route::post('store_form', [App\Http\Controllers\FormController::class,'store'])->name('storeForm');

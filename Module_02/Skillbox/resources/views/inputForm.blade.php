@@ -6,7 +6,7 @@
     <title>InputForm</title>
 </head>
 <body>
-    <form action="{{url("/store_form")}}" method="POST">
+    <form action="{{route("storeForm")}}" method="POST">
         {{ csrf_field() }}
         <div style="display: flex; flex-direction: column;gap: 10px; justify-content: space-between; width: 250px;">
         <div style="display: flex; justify-content: space-between;">
