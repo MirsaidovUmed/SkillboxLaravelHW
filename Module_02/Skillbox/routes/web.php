@@ -14,10 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'name' => 'Some name',
+        'age' => 30,
+        'position' => 'Developer',
+        'address' => 'some address'
+    ]);
 });
 
-Route::get('userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
-Route::post('store_form', [App\Http\Controllers\FormController::class,'store'])->name('storeForm');
+Route::get('/userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
+Route::post('/store_form', [App\Http\Controllers\FormController::class,'store'])->name('storeForm');
 
 Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
+
+Route::get('/contacts', function () {
+    return view('contacts', [
+        'address' => 'some address',
+        'post_code' => '12345',
+        'email' => 'gmail@gmail.com',
+        'phone' => '+1234567890'
+    ]);
+});
