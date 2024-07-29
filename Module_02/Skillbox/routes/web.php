@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
 Route::post('store_form', [App\Http\Controllers\FormController::class,'store'])->name('storeForm');
+
+Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
