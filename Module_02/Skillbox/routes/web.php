@@ -22,8 +22,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
-Route::post('/store_form', [App\Http\Controllers\FormController::class,'store'])->name('storeForm');
+// Route::get('/userform', [App\Http\Controllers\FormController::class,'index'])->name('userform');
+Route::get('/get-employee-data', [App\Http\Controllers\EmployeeController::class,'index'])->name('getEmployeeData');
+Route::post('/store_form', [App\Http\Controllers\EmployeeController::class,'store'])->name('storeForm');
+Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
 
 Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
 
