@@ -26,7 +26,8 @@ Route::get('/', function () {
 Route::get('/get-employee-data', [App\Http\Controllers\EmployeeController::class,'index'])->name('getEmployeeData');
 Route::get('/form-employee-data', [App\Http\Controllers\EmployeeController::class,'showForm'])->name('formEmployeeData');
 Route::post('/store_form', [App\Http\Controllers\EmployeeController::class,'store'])->name('storeForm');
-Route::post('update/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('updateForm');
+Route::post('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('updateForm');
+Route::get('/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('editForm');
 Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
 
 Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');

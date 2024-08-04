@@ -44,6 +44,12 @@ class EmployeeController extends Controller
         return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Added for Employee');
     }
 
+    public function edit(int $id): View
+    {
+        $employee = Employee::findOrFail($id);
+        return view('edit-employee', compact('employee'));
+    }
+
     public function update(Request $request, int $id): RedirectResponse
     {
         $employee = Employee::findOrFail($id);    
