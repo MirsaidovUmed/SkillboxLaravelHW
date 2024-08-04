@@ -17,6 +17,9 @@
                     <th>Address</th>
                     <th>Work Data</th>
                     <th>EDIT</th>
+                    <th>
+                        DELETE
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +34,13 @@
                         <td>{{ $employee->workData }}</td>
                         <td>
                             <a href="{{ route('editForm', $employee->id) }}" class="edit-link button">EDIT</a>
+                        </td>
+                        <td>
+                            <form action="/employee/{{ $employee->id }}" method="post">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger">DELETE</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

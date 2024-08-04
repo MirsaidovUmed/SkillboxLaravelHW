@@ -28,6 +28,8 @@ Route::get('/form-employee-data', [App\Http\Controllers\EmployeeController::clas
 Route::post('/store_form', [App\Http\Controllers\EmployeeController::class,'store'])->name('storeForm');
 Route::post('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('updateForm');
 Route::get('/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('editForm');
+Route::delete('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('deleteEmployee');
+
 Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
 
 Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');

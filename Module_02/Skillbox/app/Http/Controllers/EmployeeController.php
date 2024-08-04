@@ -74,6 +74,13 @@ class EmployeeController extends Controller
         return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Updated for Employee');
     }
 
+    public function destroy(int $id): RedirectResponse
+    {
+        $employee = Employee::findOrFail($id);
+        $employee->delete();
+        return redirect()->route('getEmployeeData')->with('status','Employee deleted successfully');
+    }
+
     public function getPath(Request $request): string
     {
         return $request->path();
