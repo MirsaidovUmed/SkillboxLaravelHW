@@ -4,50 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function index(): View
     {
-        return view('get-employee-data');
+        $employees = Employee::all();
+        return view('get-employee-data', compact('employees'));
     }
 
-    public function store(Request $request): View
+    public function showForm(): View
     {
-        $path = $this->getPath($request);
-        $url = $this->getUrl($request);
-
-        $data = json_decode($request->getContent(), true);
-
-        $name = $data['name'] ?? null;
-        $surname = $data['surname'] ?? null;
-        $email = $data['email'] ?? null;
-        $position = $data['position'] ?? null;
-        $address = $data['address'] ?? null;
-        $workData = $data['workData'] ?? null;
-
-        return view('get-employee-data', compact('name', 'surname', 'email', 'address', 'position', 'workData', 'path', 'url'));
+        return view('form');
     }
 
-    public function update(Request $request, int $id): View
+    public function store(Request $request): RedirectResponse
     {
-        $path = $this->getPath($request);
-        $url = $this->getUrl($request);
+        $employee = new Employee();
+        $employee->name = $request->input('name');
+        $employee->surname = $request->input('surname');
+        $employee->email = $request->input('email');
+        $employee->position = $request->input('position');
+        $employee->address = $request->input('address');
+        $employee->workData = $request->input('workData');
+        $employee->save();
 
-        $jsonData = $request->input('jsonData');
-        $data = json_decode($jsonData, true);
-        
-        $name = $data['name'] ?? null;
-        $surname = $data['surname'] ?? null;
-        $email = $data['email'] ?? null;
-        $position = $data['position'] ?? null;
-        $address = $data['address'] ?? null;
-        $workData = $data['workData'] ?? null;
+        $employeeData = [
+            'id' => $employee->id,
+            'name' => $employee->name,
+            'surname' => $employee->surname,
+            'email' => $employee->email,
+            'position' => $employee->position,
+            'address' => $employee->address,
+            'workData' => $employee->workData
+        ];
 
-        return view('get-employee-data', compact('id', 'name', 'surname', 'email', 'address', 'position', 'workData', 'path', 'url'));
+        return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Added for Employee');
     }
-    
+
+    public function update(Request $request, int $id): RedirectResponse
+    {
+        $employee = Employee::findOrFail($id);    
+        $employee->name = $request->input('name');
+        $employee->surname = $request->input('surname');
+        $employee->email = $request->input('email');
+        $employee->position = $request->input('position');
+        $employee->address = $request->input('address');
+        $employee->workData = $request->input('workData');
+        $employee->update();
+
+        $employeeData = [
+            'id' => $employee->id,
+            'name' => $employee->name,
+            'surname' => $employee->surname,
+            'email' => $employee->email,
+            'position' => $employee->position,
+            'address' => $employee->address,
+            'workData' => $employee->workData
+        ];
+
+        return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Updated for Employee');
+    }
+
     public function getPath(Request $request): string
     {
         return $request->path();
