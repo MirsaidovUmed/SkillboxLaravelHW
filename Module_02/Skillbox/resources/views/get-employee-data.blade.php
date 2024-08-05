@@ -1,61 +1,67 @@
 @extends('layouts.default')
 
 @section('content')
+<div class="start_page">
     <h1>Employee Data</h1>
-
-    <div style="text-align:center; margin-bottom: 20px;">
+    <div>
         <a href="{{ route('formEmployeeData') }}" class="create-button">Create New Employee</a>
     </div>
+</div>
 
-    @if($employees->isEmpty())
-        <p>No employee data available.</p>
-    @else
-        <table class="employee-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Email</th>
-                    <th>Position</th>
-                    <th>Address</th>
-                    <th>Work Data</th>
-                    <th>EDIT</th>
-                    <th>DELETE</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($employees as $employee)
-                    <tr>
-                        <td>{{ $employee->id }}</td>
-                        <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->surname }}</td>
-                        <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->position }}</td>
-                        <td>{{ $employee->address }}</td>
-                        <td>{{ $employee->workData }}</td>
-                        <td>
-                            <a href="{{ route('editForm', $employee->id) }}" class="edit-link button">EDIT</a>
-                        </td>
-                        <td>
-                            <form action="/employee/{{ $employee->id }}" method="post" class="delete-button">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit">DELETE</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+@if($employees->isEmpty())
+<p>No employee data available.</p>
+@else
+<table class="employee-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Address</th>
+            <th>Work Data</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($employees as $employee)
+        <tr>
+            <td>{{ $employee->id }}</td>
+            <td>{{ $employee->name }}</td>
+            <td>{{ $employee->surname }}</td>
+            <td>{{ $employee->email }}</td>
+            <td>{{ $employee->position }}</td>
+            <td>{{ $employee->address }}</td>
+            <td>{{ $employee->workData }}</td>
+            <td>
+                <a href="{{ route('editForm', $employee->id) }}" class="edit-link button">EDIT</a>
+            </td>
+            <td>
+                <form action="/employee/{{ $employee->id }}" method="post" class="delete-button">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit">DELETE</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
 @endsection
 
 <style>
     body {
         font-family: Arial, sans-serif;
     }
-
+    .start_page
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
     h1 {
         text-align: center;
         color: #333;
@@ -91,7 +97,8 @@
         background-color: #f4f4f4;
     }
 
-    .employee-table th, .employee-table td {
+    .employee-table th,
+    .employee-table td {
         padding: 12px 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
@@ -142,9 +149,8 @@
         cursor: pointer;
         transition: background-color 0.3s;
     }
-    
-    .delete-button button
-    {
+
+    .delete-button button {
         background: none;
         border: none;
         color: #fff;
