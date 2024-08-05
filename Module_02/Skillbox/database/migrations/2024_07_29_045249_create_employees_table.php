@@ -18,7 +18,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('position');
             $table->string('address');
-            $table->string('workData');
+            $table->json('workData')->nullable();
+            $table->string('street')->nullable();
+            $table->string('suite')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->timestamps();
         });
     }

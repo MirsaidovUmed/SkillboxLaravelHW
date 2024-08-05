@@ -16,5 +16,11 @@ class Employee extends Model
         'position',
         'address',
         'workData',
+        'street',
+        'suite',
+        'city',
+        'zipcode',
+        'lat',
+        'lng'
     ];
 }

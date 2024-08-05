@@ -28,20 +28,21 @@ class EmployeeController extends Controller
         $employee->email = $request->input('email');
         $employee->position = $request->input('position');
         $employee->address = $request->input('address');
-        $employee->workData = $request->input('workData');
+        $workData = json_decode($request->input('workData'), true);
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $employee->workData = json_encode($workData);
+            $employee->street = $workData['address']['street'] ?? null;
+            $employee->suite = $workData['address']['suite'] ?? null;
+            $employee->city = $workData['address']['city'] ?? null;
+            $employee->zipcode = $workData['address']['zipcode'] ?? null;
+            $employee->lat = $workData['address']['geo']['lat'] ?? null;
+            $employee->lng = $workData['address']['geo']['lng'] ?? null;
+        }
+
         $employee->save();
 
-        $employeeData = [
-            'id' => $employee->id,
-            'name' => $employee->name,
-            'surname' => $employee->surname,
-            'email' => $employee->email,
-            'position' => $employee->position,
-            'address' => $employee->address,
-            'workData' => $employee->workData
-        ];
-
-        return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Added for Employee');
+        return redirect()->route('getEmployeeData')->with('status', 'Data Added for Employee');
     }
 
     public function edit(int $id): View
@@ -59,21 +60,23 @@ class EmployeeController extends Controller
         $employee->position = $request->input('position');
         $employee->address = $request->input('address');
         $employee->workData = $request->input('workData');
+        $workData = json_decode($request->input('workData'), true);
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $employee->workData = json_encode($workData);
+            $employee->street = $workData['address']['street'] ?? null;
+            $employee->suite = $workData['address']['suite'] ?? null;
+            $employee->city = $workData['address']['city'] ?? null;
+            $employee->zipcode = $workData['address']['zipcode'] ?? null;
+            $employee->lat = $workData['address']['geo']['lat'] ?? null;
+            $employee->lng = $workData['address']['geo']['lng'] ?? null;
+        }
+
         $employee->update();
 
-        $employeeData = [
-            'id' => $employee->id,
-            'name' => $employee->name,
-            'surname' => $employee->surname,
-            'email' => $employee->email,
-            'position' => $employee->position,
-            'address' => $employee->address,
-            'workData' => $employee->workData
-        ];
-
-        return redirect()->route('getEmployeeData', ['employee' => $employeeData])->with('status','Data Updated for Employee');
+        return redirect()->route('getEmployeeData')->with('status', 'Data Updated for Employee');
     }
-
+    
     public function destroy(int $id): RedirectResponse
     {
         $employee = Employee::findOrFail($id);
