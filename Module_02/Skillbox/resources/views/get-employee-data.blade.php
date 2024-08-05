@@ -3,6 +3,10 @@
 @section('content')
     <h1>Employee Data</h1>
 
+    <div style="text-align:center; margin-bottom: 20px;">
+        <a href="{{ route('formEmployeeData') }}" class="create-button">Create New Employee</a>
+    </div>
+
     @if($employees->isEmpty())
         <p>No employee data available.</p>
     @else
@@ -58,6 +62,24 @@
         text-align: center;
         color: #333;
         margin-bottom: 20px;
+    }
+
+    .create-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        color: #fff;
+        background-color: #38c172;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .create-button:hover {
+        background-color: #2fa360;
     }
 
     .employee-table {
