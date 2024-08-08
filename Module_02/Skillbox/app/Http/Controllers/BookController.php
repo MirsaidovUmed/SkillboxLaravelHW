@@ -36,7 +36,7 @@ class BookController extends Controller
             ]);
             $book->create($request->all());
     
-            return redirect()->route("showModule6")->with('status', 'Data Added for Book');    
+            return redirect()->route("getBooksData")->with('status', 'Data Added for Book');    
         }catch (ValidationException $errors){
             return $errors->getMessage();
         }
