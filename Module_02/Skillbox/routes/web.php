@@ -29,10 +29,13 @@ Route::post('/store_form', [App\Http\Controllers\EmployeeController::class,'stor
 Route::post('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('updateForm');
 Route::get('/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('editForm');
 Route::delete('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('deleteEmployee');
+Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
 
 Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
 
-Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
+Route::get('/get-books-data', [App\Http\Controllers\BookController::class,'index'])->name('getBooksData');
+Route::get('/module6',[App\Http\Controllers\BookController::class,'show'])->name('showModule6');
+Route::post('/module6',[App\Http\Controllers\BookController::class,'store'])->name('storeModule6');
 
 Route::get('/contacts', function () {
     return view('contacts', [
