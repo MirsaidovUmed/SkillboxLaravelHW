@@ -30,8 +30,13 @@ Route::post('/employee/{id}', [App\Http\Controllers\EmployeeController::class, '
 Route::get('/employee/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('editForm');
 Route::delete('/employee/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('deleteEmployee');
 Route::get('/test_database', [App\Http\Controllers\EmployeeController::class,'store'])->name('testDb');
+// Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
 
-Route::put('/user/{id}', [App\Http\Controllers\FormController::class, 'update'])->name('userUpdate');
+Route::get('/users-all', [App\Http\Controllers\UserController::class,'index'])->name('getUsersAll');
+Route::get('/user/{id}', [App\Http\Controllers\UserController::class,'getUserById'])->name('getUsersById');
+Route::get('/create-user', [App\Http\Controllers\UserController::class,'showUserForm'])->name('showUserForm');
+Route::post('/create-user', [App\Http\Controllers\UserController::class,'create'])->name('createUser');
+Route::get('/user-pdf/{id}', [App\Http\Controllers\PdfGeneratorController::class,'index'])->name('getUsersPDF');
 
 Route::get('/get-books-data', [App\Http\Controllers\BookController::class,'index'])->name('getBooksData');
 Route::get('/module6',[App\Http\Controllers\BookController::class,'show'])->name('showModule6');
