@@ -42,6 +42,13 @@ Route::get('/get-books-data', [App\Http\Controllers\BookController::class,'index
 Route::get('/module6',[App\Http\Controllers\BookController::class,'show'])->name('showModule6');
 Route::post('/module6',[App\Http\Controllers\BookController::class,'store'])->name('storeModule6');
 
+Route::get('/products-all', [App\Http\Controllers\ProductController::class,'index'])->name('getProductsAll');
+Route::get('/create-product', [App\Http\Controllers\ProductController::class,'show'])->name('showProductForm');
+Route::get('/product/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('editProductForm');
+Route::post('/create-product', [App\Http\Controllers\ProductController::class,'store'])->name('createProduct');
+Route::post('/product/{id}', [App\Http\Controllers\ProductController::class,'update'])->name('updateProduct');
+Route::delete('/product/{id}', [App\Http\Controllers\ProductController::class,'destroy'])->name('deleteProduct');
+
 Route::get('/contacts', function () {
     return view('contacts', [
         'address' => 'some address',

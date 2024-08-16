@@ -15,35 +15,24 @@ class ProductService
 
     public function create(array $data)
     {
-        $validator = Validator::make($data, [
-            'sku' => 'required|string',
-            'name' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
-
         return Product::create($data);
     }
 
-    public function update(Product $product, array $data)
+
+    public function edit(int $id)
     {
-        $validator = Validator::make($data, [
-            'sku' => 'required|string',
-            'name' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
-
+        return Product::findOrFail($id);
+    }
+    public function update(Product $product, array $data, int $id)
+    {
+        $product = Product::findOrFail($id);
         $product->update($data);
         return $product;
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product, int $id)
     {
+        $product = Product::findOrFail($id);
         $product->delete();
         return true;
     }

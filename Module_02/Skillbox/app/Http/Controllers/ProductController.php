@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -18,24 +19,34 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productService->index();
-        return response()->json($products);
+        return view("products.index", compact("products"));
     }
 
-    public function store(Request $request)
+    public function show()
     {
-        $product = $this->productService->create($request->all());
-        return response()->json($product, 201);
+        return view("products.create");
+    }
+    public function store(ProductStoreRequest $request)
+    {
+        $this->productService->create($request->validated());
+        return redirect()->route("getProductsAll")->with("success","Product created");
     }
 
-    public function update(Request $request, Product $product)
+    public function edit(int $id)
     {
-        $updatedProduct = $this->productService->update($product, $request->all());
-        return response()->json($updatedProduct);
+        $product = $this->productService->edit($id);
+        return view("products.edit", compact("product"));
     }
 
-    public function destroy(Product $product)
+    public function update(ProductUpdateRequest $request, Product $product, int $id)
     {
-        $this->productService->destroy($product);
-        return response()->json(null, 204);
+        $this->productService->update($product, $request->validated(), $id);
+        return redirect()->route("getProductsAll")->with("success","Product updated");
+    }
+
+    public function destroy(Product $product, int $id)
+    {
+        $this->productService->destroy($product, $id);
+        return redirect()->route("getProductsAll")->with("success","Product deleted");
     }
 }
