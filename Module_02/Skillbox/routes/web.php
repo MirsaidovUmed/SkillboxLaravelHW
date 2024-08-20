@@ -1,6 +1,8 @@
 <?php
 
+use App\Events\NewsHidden;
 use Illuminate\Support\Facades\Route;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,24 @@ Route::get('/product/{id}/edit', [App\Http\Controllers\ProductController::class,
 Route::post('/create-product', [App\Http\Controllers\ProductController::class,'store'])->name('createProduct');
 Route::post('/product/{id}', [App\Http\Controllers\ProductController::class,'update'])->name('updateProduct');
 Route::delete('/product/{id}', [App\Http\Controllers\ProductController::class,'destroy'])->name('deleteProduct');
+
+Route::get('/news/create-test', function (){
+    $news = new News;
+    $news->title = 'Test news title';
+    $news->body = 'Test news body';
+    $news->save();
+    return $news;
+});
+
+Route::get('/news/{id}/hide', function (int $id){
+    $news = News::findOrFail($id);
+    $news->hidden = true;
+    $news->save();
+    
+    NewsHidden::dispatch($news);
+
+    return 'News hidden';
+});
 
 Route::get('/contacts', function () {
     return view('contacts', [
