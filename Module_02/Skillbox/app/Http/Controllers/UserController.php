@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
 
@@ -35,11 +37,16 @@ class UserController extends Controller
             $user = new User;
 
             $request->validate([
-                "name"=> "required|max:50",
-                "surname"=> "required|max:50",
-                "email"=> "required|email|max:255|unique:users",
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Password::defaults()],
             ]);
-            $user->create($request->all());
+    
+            $user->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
     
             return redirect()->route("getUsersAll")->with('status', 'Data Added for User');    
         }catch (ValidationException $errors){
