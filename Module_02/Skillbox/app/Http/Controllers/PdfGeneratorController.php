@@ -14,7 +14,6 @@ class PdfGeneratorController extends Controller
         
         $data = [
             'name' => $user->name,
-            'surname' => $user->surname,
             'email' => $user->email,
         ];
 
