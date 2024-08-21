@@ -13,6 +13,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
+        $this->authorize('view-any', User::class);
         $users = User::all();
         return view('getUserData', compact('users'));
     }
