@@ -10,8 +10,8 @@
                 <input type="text" name="name" id="name" class="form-control" required="true">
             </div>
             <div class="form-group" style="display: flex; justify-content: space-between;">
-                <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname" class="form-control" required="true">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" required="true">
             </div>
             <div class="form-group" style="display: flex; justify-content: space-between;">
                 <label for="email">Email</label>

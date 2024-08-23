@@ -16,7 +16,6 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Surname</th>
             <th>Email</th>
             <th>PDF</th>
         </tr>
@@ -26,7 +25,6 @@
         <tr>
             <td>{{ $user->id }}</td>
             <td>{{ $user->name }}</td>
-            <td>{{ $user->surname }}</td>
             <td>{{ $user->email }}</td>
             <td>
                 <a href="{{ route('getUsersPDF', $user->id) }}" class="pdf-button">

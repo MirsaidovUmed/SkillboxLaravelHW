@@ -7,7 +7,6 @@
 </head>
 <body>
     <h1>Name: {{ $user->name }}</h1>
-    <p>Surname: {{ $user->surname }}</p>
     <p>Email: {{ $user->email }}</p>
 </body>
 </html>
