@@ -23,8 +23,6 @@ class RegisteredUserController extends Controller
 
     public function store(Request $request)
     {
-        Log::info('Стучится ли');
-    
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
@@ -48,7 +46,7 @@ class RegisteredUserController extends Controller
         Telegram::sendMessage([
         'chat_id' => env('TELEGRAM_CHANNEL_ID'),
         'parse_mode' => 'html',
-        'text' => 'Появился новый пользователь -> ' . $user->email,
+        'text' => 'Появился новый пользователь -> ' . $user->name,
         ]);
         
         return redirect()->route('dashboard');
