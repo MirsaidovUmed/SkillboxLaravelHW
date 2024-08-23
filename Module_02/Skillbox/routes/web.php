@@ -1,6 +1,12 @@
 <?php
 
+use App\Events\UserRegistered;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
+use App\Listeners\UserRegisteredListener;
+use App\Mail\Welcome;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +41,6 @@ Route::get('/user/{id}', [App\Http\Controllers\UserController::class,'getUserByI
 Route::get('/create-user', [App\Http\Controllers\UserController::class,'showUserForm'])->name('showUserForm');
 Route::post('/create-user', [App\Http\Controllers\UserController::class,'create'])->name('createUser');
 Route::get('/user-pdf/{id}', [App\Http\Controllers\PdfGeneratorController::class,'index'])->name('getUsersPDF');
+
+Route::get('/create-user-with-email', [RegisteredUserController::class, 'index'])->name('createUserWithEmail');
+Route::post('/create-user-with-email', [RegisteredUserController::class, 'store'])->name('sendEmail');

@@ -1,9 +1,8 @@
 @extends('layouts.default')
 
 @section('content')
-    <form name="employee-form" id="employee-form" action="{{ route('createUser')}}" method="POST">
+    <form name="employee-form" id="employee-form" action="{{ route('sendEmail')}}" method="POST">
         @csrf
-
         <div style="display: flex; flex-direction: column;gap: 10px; justify-content: space-between; width: 250px;">
             <div class="form-group" style="display: flex; justify-content: space-between;">
                 <label for="name">Name</label>
