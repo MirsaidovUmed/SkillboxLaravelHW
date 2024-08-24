@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class RegisteredUserController extends Controller
 {
@@ -43,6 +44,12 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        Telegram::sendMessage([
+        'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+        'parse_mode' => 'html',
+        'text' => 'Появился новый пользователь -> ' . $user->name,
+        ]);
 
         Auth::login($user);
 
