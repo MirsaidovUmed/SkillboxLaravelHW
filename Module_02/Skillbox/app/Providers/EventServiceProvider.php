@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\NewsHidden;
+use App\Events\UserRegistered;
 use App\Listeners\NewsHiddenListener;
+use App\Listeners\UserRegisteredListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewsHidden::class => [
             NewsHiddenListener::class,
+        ],
+        UserRegistered::class => [
+            UserRegisteredListener::class,
         ],
     ];
 

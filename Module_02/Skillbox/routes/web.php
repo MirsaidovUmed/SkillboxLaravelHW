@@ -1,6 +1,12 @@
 <?php
 
+use App\Events\UserRegistered;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
+use App\Listeners\UserRegisteredListener;
+use App\Mail\Welcome;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
