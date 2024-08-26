@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -44,6 +45,7 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+        event(new UserRegistered($user));
 
         Telegram::sendMessage([
         'chat_id' => env('TELEGRAM_CHANNEL_ID'),
