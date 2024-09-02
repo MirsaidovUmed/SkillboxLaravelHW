@@ -15,6 +15,7 @@ class ProductStoreRequest extends FormRequest{
         return [
             'name' => 'required|string|max:255',
             'sku' => 'required|string',
+            'price' => 'required'
         ];
     }
 
@@ -23,6 +24,7 @@ class ProductStoreRequest extends FormRequest{
         return [
             'name.required' => 'Название продукта обязательно для заполнения.',
             'sku.required' => 'Артикул продукта обязателен для заполнения.',
+            'price.required' => 'Цена продукта обязательна для заполнения.',
         ];
     }
 }
